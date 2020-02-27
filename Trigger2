@@ -1,0 +1,14 @@
+trigger Trigr2 on Public_Event__c (before insert, after insert, after update) {
+    for(Public_Event__c pe : Trigger.new){
+         if(trigger.isBefore){
+            Helper2.eventmethod();
+        }
+        if(Trigger.isInsert||Trigger.isUpdate){
+        
+        if(pe.Status__c=='Completed'){
+            Helper2.eventmethod2(pe);
+        }
+       }
+    }
+
+}
