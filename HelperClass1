@@ -1,0 +1,21 @@
+public class Helper1 {
+    public static void method(Donation__c d){
+        List<Task> tsk = new List<Task>();
+        for(Task t1: tsk){
+        Task t = new Task();
+        t.Subject=d.name;
+        tsk.add(t1);
+        }
+        insert tsk;
+    }
+    public static void method2(Donation__c d){
+        if(d.Contact_Email__c!=null){
+        Messaging.SingleEmailMessage message = new Messaging.SingleEmailMessage();
+        message.toAddresses = new String[]{d.Contact_Email__c};
+        message.subject = 'Thank You!!';
+        message.plaintextbody = 'Thank you for your Donation';
+        Messaging.SendEmailResult[] results = Messaging.sendEmail(
+                                  new Messaging.SingleEmailMessage[] { message });
+        }
+    }
+}
