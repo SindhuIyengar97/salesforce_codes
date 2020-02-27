@@ -1,0 +1,35 @@
+public class Helper2 {
+    public static void eventmethod(){
+        List<Public_Event__c> plist = [select name, type__c, account__c from Public_Event__c];
+        List<Volunteers__c> vlist = [select name, interest__c, status__c from volunteers__c];
+        for(Public_Event__c pe: plist){
+            for(Volunteers__c v: vlist){
+                if(pe.Type__c == v.Interest__c){
+                    if(v.Status__c=='Available'){
+                        pe.Account__c= v.id;
+                        v.Name = pe.Name;      
+                    }
+                }
+            }
+        }
+    }
+    public static void eventmethod2(Public_Event__c pe){
+        List<Account> accList = [select id, name from Account];
+        
+     List<Donation__c> d = new List<Donation__c>();
+   
+        for(Account a1 : accList){
+            if(pe.Account__c == a1.id){
+        Donation__c d1 = new Donation__c();
+        d1.Account__c = a1.Id;
+        d1.Name = a1.Name;
+        d1.Status__c = 'donated';
+        d1.Source__c = 'Public Event'; 
+                d.add(d1);
+            }
+    
+        }
+        
+    insert d;      
+}
+}
