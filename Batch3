@@ -1,0 +1,23 @@
+global class Batch3 implements database.Batchable<sObject> {
+    global database.QueryLocator start(database.BatchableContext bc){
+        return database.getQueryLocator('select id, name, Account__c, status__c from donation__c');
+    }
+    global void execute(database.BatchableContext bc, List<donation__c> scope){
+       List<Account> accList = [select id, name, status__c  from Account];
+        for(Account a: accList){
+        for(donation__c d : scope){
+            if(d.Status__c=='cancelled'||d.Status__c=='donation cancelled'){
+                if(d.Account__c==a.id){
+                    a.Status__c ='purged';
+                }
+            }
+        }
+        accList.add(a);    
+       }
+        
+        Update accList;
+    }
+    global void finish(database.BatchableContext bc){
+        
+    }
+}
