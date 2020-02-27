@@ -1,0 +1,23 @@
+global class Batch1 implements database.Batchable<sObject>, database.stateful{
+    global database.QueryLocator start(database.BatchableContext bc){
+        return database.getQueryLocator('select name, created_date__c, Total_Donations__c from Account where created_date__c!=null');
+    }
+    global void execute(database.BatchableContext bc, List<Account> scope){
+        List<Account> accList = new List<Account>();
+        for(Account a:scope){
+            if(a.created_date__c.monthsBetween(date.today())>6)
+            {
+                if(a.Total_Donations__c==0)
+                {
+                    accList.add(a);  
+                }
+            }
+         }
+        system.debug(accList);
+        delete accList;
+        }
+         
+  global void finish(Database.BatchableContext BC){
+        
+    }
+}
