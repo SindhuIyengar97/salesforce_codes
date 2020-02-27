@@ -1,35 +1,35 @@
 # salesforce_codes
 Donation Management App [Here is the problem statement]
 Objects:-
-Account
-Total Donation: Currency (Rollup Summary)
-Status:Picklist(Active, Purged)
+1)Account
+a)Total Donation: Currency (Rollup Summary)
+b)Status:Picklist(Active, Purged)
 
-Donations:
-Amount:Currency
-Status:Picklist(Planned, Donated, Cancelled, Donation Cancelled)
-Cancellation Reasons:Text Area
-Account:Master Detail
-Source:Text
-Contact Email:Email
-Contact Phone:Phone
-Name: Auto Number
+2)Donations:
+a)Amount:Currency
+b)Status:Picklist(Planned, Donated, Cancelled, Donation Cancelled)
+c)Cancellation Reasons:Text Area
+d)Account:Master Detail
+e)Source:Text
+f)Contact Email:Email
+g)Contact Phone:Phone
+h)Name: Auto Number
 
-Volunteers:
-Contact Name:Text
-Contact Email:Email
-Contact Address:Street, City, Zip
-Interest:Sporting Event, Concert, Art Exhibition, Auction, Gala
-Status:Picklist(Available, Busy, Not Interested)
+3)Volunteers:
+a)Contact Name:Text
+b)Contact Email:Email
+c)Contact Address:Street, City, Zip
+d)Interest:Sporting Event, Concert, Art Exhibition, Auction, Gala
+e)Status:Picklist(Available, Busy, Not Interested)
 
-Public Events:
-Account:MasterDetail
-Volunteer Assigned:Lookup(Volunteer)
-Type:Picklist(Sporting Event, Concert, Art Exhibition, Auction, Gala)
-Venue:Text
-Event Date: Date
-Fund raised : Cuurency
-Status: Picklist(Upcoming, inprogress, Completed)
+4)Public Events:
+a)Account:MasterDetail
+b)Volunteer Assigned:Lookup(Volunteer)
+c)Type:Picklist(Sporting Event, Concert, Art Exhibition, Auction, Gala)
+d)Venue:Text
+e)Event Date: Date
+f)Fund raised : Cuurency
+g)Status: Picklist(Upcoming, inprogress, Completed)
 
 When Donation is made perform the following based on status:
 1)Planned: Followup with creating task, subject as name of the donation
@@ -38,7 +38,7 @@ When Donation is made perform the following based on status:
  ii)To:Donator Contact email
 iii)Body: Thank you for your donation
 3)Cancelled:Capture the reason
-4)Donation Cancelled:Deduct the amount from Account
+4)Donation Cancelled:Deduct the amount from Account.
 
 2)User should not be ble to change the amount if the status is not "Planned"
 
