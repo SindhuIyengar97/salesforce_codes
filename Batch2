@@ -1,0 +1,22 @@
+global class Batch2 implements database.Batchable<sObject> {
+ global database.QueryLocator start(database.BatchableContext bc){
+        return database.getQueryLocator('select id, name, LastModifiedDate from Donation__c');
+    }
+   global void execute(database.BatchableContext bc, List<Donation__c> scope){
+     system.debug(scope);
+     for(donation__c d: scope){
+         if(d.Status__c=='Donated'){
+             if(d.LastModifiedDate.date().daysBetween(date.today())>=365){
+                 Helper1.method2(d);
+             }
+             
+              }                 
+             
+         }
+       }
+   
+    global void finish(Database.BatchableContext BC){
+        
+    }
+
+}
