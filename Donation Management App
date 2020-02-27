@@ -1,0 +1,35 @@
+trigger Trigr1 on Donation__c (before insert, after insert, before update, after update) {
+    List<Donation__c> d0 = Trigger.new; 
+    List<Donation__c> d1 = Trigger.old;
+    
+    for(Donation__c d: d0){
+        if(trigger.isinsert){
+            if(d.Status__c=='Planned')
+            { 
+                 Helper1.method(d);   
+            }
+            if(d.Status__c=='Donated')
+            {
+                Helper1.method2(d);
+            }
+            if(d.Status__c=='Cancelled'){
+                if(d.Cancellation_Reasons__c==null){
+                d.addError('Reason is mandatory');
+                    }
+            }
+            if(d.Status__c=='Donation Cancelled'){
+                
+            }
+          }
+      }  
+    if(trigger.isAfter){
+        if(Trigger.isUpdate){
+      for(donation__c d4: d0){
+          for(donation__c d5: d1){
+            
+            if(d4.Status__c != 'Planned'){
+            if(d4.Amount__c != d5.Amount__c){
+                d4.addError('Cannot modify amount!!');
+            }   
+          }
+        }
